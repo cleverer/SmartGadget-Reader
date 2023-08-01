@@ -1,4 +1,16 @@
 [[package]]
+name = "dbus-python"
+version = "1.3.2"
+description = "Python bindings for libdbus"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+doc = ["sphinx", "sphinx-rtd-theme"]
+test = ["tap.py"]
+
+[[package]]
 name = "gatt"
 version = "0.2.7"
 description = "Bluetooth GATT SDK for Python"
@@ -9,7 +21,8 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "eeae9ad18f1c10b668a1da711bc1d774d88dd138d438ef62c260e47636ddd40d"
+content-hash = "9aca694e4fb7c833071be6d40f65291623a875eb3fe7cd1922b043107f29ed4c"
 
 [metadata.files]
+dbus-python = []
 gatt = []
