@@ -1,0 +1,15 @@
+[[package]]
+name = "gatt"
+version = "0.2.7"
+description = "Bluetooth GATT SDK for Python"
+category = "main"
+optional = false
+python-versions = "*"
+
+[metadata]
+lock-version = "1.1"
+python-versions = "^3.9"
+content-hash = "eeae9ad18f1c10b668a1da711bc1d774d88dd138d438ef62c260e47636ddd40d"
+
+[metadata.files]
+gatt = []
