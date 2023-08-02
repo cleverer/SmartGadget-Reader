@@ -1,6 +1,4 @@
-import gatt
-
-from smartgadget import SHT40
+from smartgadget import SHT40, AnyDeviceManager
 
 
 def test_callback_temp(temp: int) -> None:
@@ -8,11 +6,13 @@ def test_callback_temp(temp: int) -> None:
 
 
 def test_callback_humid(temp: int) -> None:
-    print(f"Measured Temp: {temp}")
+    print(f"Measured humidity: {temp}")
 
 
 def run():
-    manager = gatt.DeviceManager(adapter_name="hci0")
+    manager = AnyDeviceManager(adapter_name="hci0")
+    manager.start_discovery()
+
     bedroom = SHT40(
         mac_address="",
         manager=manager,
@@ -23,7 +23,14 @@ def run():
     bedroom.connect()
 
     # RunLoop
-    manager.run()
+    try:
+        manager.run()
+    except Exception:
+        pass
+
+    if callable(bedroom.disconnect):
+        bedroom.disconnect()
+        print("disconnected")
 
 
 # Press the green button in the gutter to run the script.
