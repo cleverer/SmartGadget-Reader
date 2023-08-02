@@ -15,7 +15,7 @@ class SHT40(gatt.Device):
         temperature_callback: Callable[[int], None],
         humidity_callback: Callable[[int], None],
     ) -> None:
-        super().__init__(mac_address=mac_address, manager=manager)
+        super().__init__(mac_address=mac_address.lower(), manager=manager)
         self.temperature_callback = temperature_callback
         self.humidity_callback = humidity_callback
 

@@ -12,6 +12,7 @@ def test_callback_humid(temp: int) -> None:
 def run():
     manager = AnyDeviceManager(adapter_name="hci0")
     manager.start_discovery(service_uuids=[SHT40.t_uuid, SHT40.h_uuid])
+    print("Started Discovery")
 
     bedroom = SHT40(
         mac_address="",
@@ -22,13 +23,18 @@ def run():
 
     bedroom.connect()
 
+    print("bedroom connected. Stopping discovery")
+
+    # all devices connected, so stop discovering
+    manager.stop_discovery()
+
+    print("Discovery Stopped. Starting run loop")
+
     # RunLoop
     try:
         manager.run()
     except Exception:
         pass
-
-    manager.stop_discovery()
 
     if callable(bedroom.disconnect):
         bedroom.disconnect()

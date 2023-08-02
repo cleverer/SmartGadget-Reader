@@ -18,11 +18,32 @@ category = "main"
 optional = false
 python-versions = "*"
 
+[[package]]
+name = "pycairo"
+version = "1.24.0"
+description = "Python interface for cairo"
+category = "main"
+optional = false
+python-versions = ">=3.8"
+
+[[package]]
+name = "pygobject"
+version = "3.44.1"
+description = "Python bindings for GObject Introspection"
+category = "main"
+optional = false
+python-versions = ">=3.7, <4"
+
+[package.dependencies]
+pycairo = ">=1.16,<2.0"
+
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "9aca694e4fb7c833071be6d40f65291623a875eb3fe7cd1922b043107f29ed4c"
+content-hash = "049acf1a4b63ac1dca27ad127b86545d8de8a4eb307bd29fe988d7c5c6abbe04"
 
 [metadata.files]
 dbus-python = []
 gatt = []
+pycairo = []
+pygobject = []

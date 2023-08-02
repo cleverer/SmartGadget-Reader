@@ -8,6 +8,7 @@ authors = ["Nicolas Da Mutten <nicolas@damutten.ch>"]
 python = "^3.9"
 gatt = "^0.2.7"
 dbus-python = {version = "^1.3.2", platform = "linux"}
+PyGObject = {version = "^3.44.1", platform = "linux"}
 
 [tool.poetry.dev-dependencies]
 
