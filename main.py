@@ -11,7 +11,7 @@ def test_callback_humid(temp: int) -> None:
 
 def run():
     manager = AnyDeviceManager(adapter_name="hci0")
-    manager.start_discovery()
+    manager.start_discovery(service_uuids=[SHT40.t_uuid, SHT40.h_uuid])
 
     bedroom = SHT40(
         mac_address="",
@@ -27,6 +27,8 @@ def run():
         manager.run()
     except Exception:
         pass
+
+    manager.stop_discovery()
 
     if callable(bedroom.disconnect):
         bedroom.disconnect()
