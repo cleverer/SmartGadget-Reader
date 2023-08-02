@@ -33,12 +33,13 @@ def run():
     # RunLoop
     try:
         manager.run()
-    except Exception:
+    except KeyboardInterrupt:
         pass
-
-    if callable(bedroom.disconnect):
-        bedroom.disconnect()
-        print("disconnected")
+    finally:
+        if callable(bedroom.disconnect):
+            print("disconnecting")
+            bedroom.disconnect()
+            print("disconnected")
 
 
 # Press the green button in the gutter to run the script.

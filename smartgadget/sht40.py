@@ -22,6 +22,8 @@ class SHT40(gatt.Device):
     def services_resolved(self) -> None:
         super().services_resolved()
 
+        print("Resolved services")
+
         for s in self.services:
             if s.uuid == "00002234-b38d-4985-720e-0f993a68ee41":
                 temperature_service = s
