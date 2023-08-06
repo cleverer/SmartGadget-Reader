@@ -1,2 +1,2 @@
-from .AnyDeviceManager import AnyDeviceManager
-from .sht40 import SHT40
+from .NotifiableBTLEConnection import NotifiableBTLEConnection
+from .NotifiableSmartGadget import NotifiableSmartGadget

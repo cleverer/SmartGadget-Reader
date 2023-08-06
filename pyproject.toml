@@ -13,3 +13,6 @@ python-smartgadget = {version = "^0.1.3", platform = "linux"}
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
