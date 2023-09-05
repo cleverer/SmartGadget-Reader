@@ -1,4 +1,37 @@
 [[package]]
+name = "apscheduler"
+version = "3.10.4"
+description = "In-process task scheduler with Cron-like capabilities"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+pytz = "*"
+six = ">=1.4.0"
+tzlocal = ">=2.0,<3.0.0 || >=4.0.0"
+
+[package.extras]
+doc = ["sphinx", "sphinx-rtd-theme"]
+gevent = ["gevent"]
+mongodb = ["pymongo (>=3.0)"]
+redis = ["redis (>=3.0)"]
+rethinkdb = ["rethinkdb (>=2.4.0)"]
+sqlalchemy = ["sqlalchemy (>=1.4)"]
+testing = ["pytest", "pytest-asyncio", "pytest-cov", "pytest-tornado5"]
+tornado = ["tornado (>=4.3)"]
+twisted = ["twisted"]
+zookeeper = ["kazoo"]
+
+[[package]]
+name = "argparse-logging"
+version = "2020.11.26"
+description = "This is a simple library to configure logging from command line argument when using argparse."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
 name = "bluepy"
 version = "1.3.0"
 description = "Python module for interfacing with BLE devices through Bluez"
@@ -17,11 +50,55 @@ python-versions = ">=3.4"
 [package.dependencies]
 bluepy = ">=1.0.5"
 
+[[package]]
+name = "pytz"
+version = "2023.3.post1"
+description = "World timezone definitions, modern and historical"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "six"
+version = "1.16.0"
+description = "Python 2 and 3 compatibility utilities"
+category = "main"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
+
+[[package]]
+name = "tzdata"
+version = "2023.3"
+description = "Provider of IANA time zone data"
+category = "main"
+optional = false
+python-versions = ">=2"
+
+[[package]]
+name = "tzlocal"
+version = "5.0.1"
+description = "tzinfo object for the local timezone"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+tzdata = {version = "*", markers = "platform_system == \"Windows\""}
+
+[package.extras]
+devenv = ["black", "check-manifest", "flake8", "pyroma", "pytest-cov", "pytest-mock (>=3.3)", "pytest (>=4.3)", "zest.releaser"]
+
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "b13098d9575b2d81ea66a24fa95285db5c6bae674350e68eb5187c4c3a54d6c8"
+content-hash = "d331b55ddab627fe61623c9a63d52bf17feefbc425e09cd52eead61b36e3ff49"
 
 [metadata.files]
+apscheduler = []
+argparse-logging = []
 bluepy = []
 python-smartgadget = []
+pytz = []
+six = []
+tzdata = []
+tzlocal = []

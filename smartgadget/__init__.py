@@ -1,2 +1,0 @@
-from .NotifiableBTLEConnection import NotifiableBTLEConnection
-from .NotifiableSmartGadget import NotifiableSmartGadget
