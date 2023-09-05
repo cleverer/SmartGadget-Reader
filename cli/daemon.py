@@ -32,7 +32,7 @@ class Daemon:
 
     @classmethod
     def run(cls) -> None:
-        cron = environ.get("SCHEDULE", "*/1 * * * *")
+        cron = environ.get("SCHEDULE", "*/10 * * * *")
         scheduler = Daemon.prepare_scheduler(cron)
         cls.logger.info("Starting daemon")
         scheduler.start()
