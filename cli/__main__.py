@@ -1,4 +1,5 @@
 import argparse
+import asyncio
 import logging
 
 from argparse_logging import add_logging_arguments
@@ -15,7 +16,7 @@ def add_read_command(parser_group):
     )
 
 
-def run():
+def main():
     parser = argparse.ArgumentParser(
         description="Read SmartGadget Values and upload to InfluxDB"
     )
@@ -36,10 +37,13 @@ def run():
 
     if "subparser" in args and args.subparser is not None:
         if args.subparser == "read":
-            Reader.read()
+            try:
+                asyncio.run(Reader.read())
+            except (KeyboardInterrupt, SystemExit):
+                pass
     else:
-        Daemon.run()
+        Daemon.main()
 
 
 if __name__ == "__main__":
-    run()
+    main()

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="c6f5589e-ab71-41a7-8fb2-0bceb7d8f9a7" name="nicolas@astrosense.damutten.ch:22 agent">
+        <fileTransfer rootFolder="/home/nicolas" accessType="SFTP" host="astrosense.damutten.ch" port="22" sshConfigId="26e726cf-417b-4f08-b5d4-c80b3732cf88" sshConfig="nicolas@astrosense.damutten.ch:22 agent" authAgent="true" />
+      </webServer>
+    </option>
+  </component>
+</project>

@@ -1,8 +1,8 @@
+import asyncio
 import logging
-import signal
 from os import environ
 
-from apscheduler.schedulers.background import BlockingScheduler
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.schedulers.base import BaseScheduler
 from apscheduler.triggers.cron import CronTrigger
 
@@ -14,26 +14,30 @@ class Daemon:
 
     @classmethod
     def prepare_scheduler(cls, cron: str) -> BaseScheduler:
-        cls.logger.debug("Using BlockingScheduler")
-        scheduler = BlockingScheduler()
+        cls.logger.debug("Using AsyncIOScheduler")
+        scheduler = AsyncIOScheduler()
         cls.logger.debug(f"Scheduling Data Collection: {cron}")
         schedule = CronTrigger.from_crontab(cron)
 
         scheduler.add_job(Reader.read, schedule)
 
-        # In order to shut down clean, capture system signals
-        # and shut down the scheduler.
-        def graceful_shutdown(signum, frame) -> None:
-            scheduler.shutdown()
+        scheduler.start()
 
-        signal.signal(signal.SIGINT, graceful_shutdown)
-        signal.signal(signal.SIGTERM, graceful_shutdown)
         return scheduler
 
     @classmethod
-    def run(cls) -> None:
+    def main(cls) -> None:
+        # Create an asyncio event loop
+        loop = asyncio.get_event_loop()
+
         cron = environ.get("SCHEDULE", "*/10 * * * *")
         scheduler = Daemon.prepare_scheduler(cron)
+
         cls.logger.info("Starting daemon")
-        scheduler.start()
-        cls.logger.info("Stopping daemon")
+        try:
+            loop.run_forever()
+        except (KeyboardInterrupt, SystemExit):
+            pass
+        finally:
+            scheduler.shutdown()
+            cls.logger.info("Stopping daemon")

@@ -1,3 +1,4 @@
+import asyncio
 import logging
 
 from sensirionbt import SmartGadget
@@ -10,15 +11,16 @@ class Reader:
     logger = logging.getLogger(__name__)
 
     @classmethod
-    def process_gadget(cls, gadget_address: str):
+    async def process_gadget(cls, gadget_address: str):
         cls.logger.info(f"Processing Gadget {gadget_address}")
         bedroom = SmartGadget(gadget_address)
         data = Data(**bedroom.get_values())
         cls.logger.debug(f"Received {data}")
-        Collector.received(data)
+        await Collector.received(data)
 
     @classmethod
-    def read(cls):
+    async def read(cls):
         cls.logger.info("Reading…")
-        for gadget in ["FC:CE:02:A5:24:A7"]:
-            cls.process_gadget(gadget)
+        gadgets = ["FC:CE:02:A5:24:A7", "EA:66:DF:61:46:D1"]
+        tasks = [cls.process_gadget(gadget) for gadget in gadgets]
+        await asyncio.gather(*tasks)
