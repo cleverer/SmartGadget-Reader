@@ -35,14 +35,22 @@ def main():
 
     args = parser.parse_args()
 
+    reader = Reader()
+
     if "subparser" in args and args.subparser is not None:
         if args.subparser == "read":
+
+            async def run_once():
+                await reader.read()
+                await reader.close()
+
             try:
-                asyncio.run(Reader.read())
+                asyncio.run(run_once())
             except (KeyboardInterrupt, SystemExit):
                 pass
     else:
-        Daemon.main()
+        daemon = Daemon(reader)
+        daemon.main()
 
 
 if __name__ == "__main__":

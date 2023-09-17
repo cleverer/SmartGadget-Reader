@@ -10,6 +10,7 @@ python-smartgadget = {version = "^0.1.3", platform = "linux"}
 APScheduler = "^3.10.4"
 argparse-logging = "^2020.11.26"
 asyncio = "^3.4.3"
+influxdb-client = {extras = ["async"], version = "^1.37.0"}
 
 [tool.poetry.dev-dependencies]
 

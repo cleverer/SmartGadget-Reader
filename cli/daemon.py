@@ -12,32 +12,34 @@ from reader import Reader
 class Daemon:
     logger = logging.getLogger(__name__)
 
-    @classmethod
-    def prepare_scheduler(cls, cron: str) -> BaseScheduler:
-        cls.logger.debug("Using AsyncIOScheduler")
+    def __init__(self, reader: Reader):
+        self.reader = reader
+
+    def prepare_scheduler(self, cron: str) -> BaseScheduler:
+        self.logger.debug("Using AsyncIOScheduler")
         scheduler = AsyncIOScheduler()
-        cls.logger.debug(f"Scheduling Data Collection: {cron}")
+        self.logger.debug(f"Scheduling Data Collection: {cron}")
         schedule = CronTrigger.from_crontab(cron)
 
-        scheduler.add_job(Reader.read, schedule)
+        scheduler.add_job(self.reader.read, schedule)
 
         scheduler.start()
 
         return scheduler
 
-    @classmethod
-    def main(cls) -> None:
+    def main(self) -> None:
         # Create an asyncio event loop
         loop = asyncio.get_event_loop()
 
         cron = environ.get("SCHEDULE", "*/10 * * * *")
-        scheduler = Daemon.prepare_scheduler(cron)
+        scheduler = self.prepare_scheduler(cron)
 
-        cls.logger.info("Starting daemon")
+        self.logger.info("Starting daemon")
         try:
             loop.run_forever()
         except (KeyboardInterrupt, SystemExit):
             pass
         finally:
             scheduler.shutdown()
-            cls.logger.info("Stopping daemon")
+            loop.run_until_complete(self.reader.close())
+            self.logger.info("Stopping daemon")
